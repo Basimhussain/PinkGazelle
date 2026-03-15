@@ -42,7 +42,7 @@ export function AdminSidebar() {
         </NavLink>
 
         <span className="sidebar-heading" style={{ marginTop: 8 }}>Projects</span>
-        <NavLink to="/admin/projects" end className={({ isActive }) => `sidebar-link ${isAllProjectsActive ? 'active' : ''}`}>
+        <NavLink to="/admin/projects" end className={() => `sidebar-link ${isAllProjectsActive ? 'active' : ''}`}>
           <span>◫</span> All Projects
         </NavLink>
         {projects.map(p => (
@@ -56,7 +56,7 @@ export function AdminSidebar() {
         ))}
         <NavLink
           to="/admin/projects?archived=true"
-          className={({ isActive }) => `sidebar-link ${isArchivedActive ? 'active' : ''}`}
+          className={() => `sidebar-link ${isArchivedActive ? 'active' : ''}`}
         >
           <span>📦</span> Archived
         </NavLink>
