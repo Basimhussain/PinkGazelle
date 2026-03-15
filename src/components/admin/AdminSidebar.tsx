@@ -117,7 +117,7 @@ export function AdminSidebar() {
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 26, height: 26 }}>
-            <img src={logoAvatar} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
+            <img src={logoAvatar} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '3px' }} />
           </div>
           <div className="sidebar-user-info">
             <div className="sidebar-user-name">{displayName}</div>

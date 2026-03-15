@@ -14,6 +14,8 @@ import { getInvoicesByProject } from '../../lib/invoices'
 import { computePercentage } from '../../lib/progress'
 import { signOut } from '../../lib/auth'
 import { formatDate, formatSAR } from '../../lib/utils'
+import logoClient from '../../assets/logo-client-topbar.png'
+import logoFooter from '../../assets/logo-client-footer.png'
 // No logo imports - redo process started
 
 import type { Ticket, Milestone, Invoice, ProjectWithProgress, ActivityLog } from '../../types'
@@ -94,8 +96,8 @@ export function ClientDashboardPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', flexDirection: 'column', gap: 16 }}>
-      <div className="sidebar-logo-mark" style={{ width: 48, height: 48, background: 'var(--color-primary)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: 20 }}>
-        PG
+      <div className="sidebar-logo-mark" style={{ width: 48, height: 48, background: 'transparent' }}>
+        <img src={logoClient} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '3px' }} />
       </div>
       <div style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>Loading your portal…</div>
     </div>
@@ -106,8 +108,8 @@ export function ClientDashboardPage() {
       <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)', display: 'flex', flexDirection: 'column' }}>
         <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="sidebar-logo-mark" style={{ background: 'var(--color-primary)', width: 36, height: 36, borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: 14 }}>
-              PG
+            <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 36, height: 36 }}>
+              <img src={logoClient} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '3px' }} />
             </div>
             <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
           </div>
@@ -186,7 +188,7 @@ export function ClientDashboardPage() {
           gap: 20,
           marginTop: 'auto'
         }}>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: 'var(--color-primary)', letterSpacing: '-0.02em' }}>Pink Gazelle</div>
+          <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto', borderRadius: '8px' }} />
           <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
             © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
           </div>
@@ -208,8 +210,8 @@ export function ClientDashboardPage() {
       {/* Top bar */}
       <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div className="sidebar-logo-mark" style={{ background: 'var(--color-primary)', width: 32, height: 32, borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: 12 }}>
-            PG
+          <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 32, height: 32 }}>
+            <img src={logoClient} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '3px' }} />
           </div>
           <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
         </div>
@@ -448,7 +450,7 @@ export function ClientDashboardPage() {
         gap: 20,
         marginTop: 'auto'
       }}>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: 'var(--color-primary)', letterSpacing: '-0.02em' }}>Pink Gazelle</div>
+        <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto', borderRadius: '8px' }} />
         <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
           © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
         </div>
