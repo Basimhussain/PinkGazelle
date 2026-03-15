@@ -31,8 +31,8 @@ export function AdminSidebar() {
   return (
     <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        <div className="sidebar-logo-mark" style={{ background: 'var(--color-text-primary)' }}>
-          <img src={logoLogin} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+        <div className="sidebar-logo-mark" style={{ background: 'transparent' }}>
+          <img src={logoLogin} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <div className="sidebar-logo-details">
           <div className="sidebar-logo-name" style={{ fontSize: 16 }}>Pink Gazelle – Admin Portal</div>

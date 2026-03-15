@@ -175,7 +175,7 @@ input, textarea, select {
 .sidebar-logo-mark {
   width: 32px;
   height: 32px;
-  background: var(--color-text-primary);
+  background: transparent;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -1157,8 +1157,7 @@ textarea {
   margin-bottom: 24px;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: var(--color-text-primary);
-  padding: 8px;
+  background: transparent;
 }
 
 .login-title {

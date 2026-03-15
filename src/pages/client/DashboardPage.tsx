@@ -107,8 +107,8 @@ export function ClientDashboardPage() {
       <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)', display: 'flex', flexDirection: 'column' }}>
         <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="sidebar-logo-mark" style={{ background: 'var(--color-text-primary)', width: 36, height: 36 }}>
-              <img src={logo} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+            <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 36, height: 36 }}>
+              <img src={logo} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
             </div>
             <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
           </div>
@@ -207,8 +207,8 @@ export function ClientDashboardPage() {
       {/* Top bar */}
       <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div className="sidebar-logo-mark" style={{ background: 'var(--color-text-primary)', width: 36, height: 36 }}>
-            <img src={logo} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+          <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 36, height: 36 }}>
+            <img src={logo} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
           </div>
           <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
         </div>
