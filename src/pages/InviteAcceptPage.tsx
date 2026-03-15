@@ -7,6 +7,7 @@ export function InviteAcceptPage() {
   const token = searchParams.get('token')
   const navigate = useNavigate()
   const [error, setError] = useState('')
+  const [status, setStatus] = useState('Checking invitation…')
 
   useEffect(() => {
     if (!token) { 
@@ -21,6 +22,7 @@ export function InviteAcceptPage() {
       if (assignedRef.current) return
       assignedRef.current = true
       
+      setStatus('Accepting invitation and assigning project…')
       console.log(`Attempting to assign project with token: ${token} for user: ${userId}`);
       
       const { error: rpcError } = await supabase.rpc('accept_project_invite', {
@@ -31,10 +33,12 @@ export function InviteAcceptPage() {
       if (rpcError) {
         console.error('RPC Error in InviteAcceptPage:', rpcError);
         setError(rpcError.message)
+        setStatus('Failed to assign project')
       } else {
         console.log('Invitation accepted successfully, navigating to client portal');
-        // Small delay to ensure DB propagation if needed, although RPC is transactional
-        setTimeout(() => navigate('/client', { replace: true }), 100);
+        setStatus('Success! Redirecting to your portal…')
+        // Small delay to ensure DB propagation if needed
+        setTimeout(() => navigate('/client', { replace: true }), 1500);
       }
     }
 
@@ -43,6 +47,8 @@ export function InviteAcceptPage() {
       if (session?.user) {
         console.log('Existing session found in InviteAcceptPage:', session.user.id);
         assignProject(session.user.id)
+      } else {
+        setStatus('Ready to accept invitation. Please sign in via the magic link.')
       }
     })
 
@@ -66,7 +72,7 @@ export function InviteAcceptPage() {
             <p className="login-sub">{error}</p>
           </>
         ) : (
-          <p className="login-sub">Setting up your account…</p>
+          <p className="login-sub">{status}</p>
         )}
       </div>
     </div>
