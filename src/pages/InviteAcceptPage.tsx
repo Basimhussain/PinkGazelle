@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { supabase } from '../lib/supabase'
 
 import logo from '../assets/logo-login.png'
 
 export function InviteAcceptPage() {
+  useDocumentTitle('Join Project — Pink Gazelle')
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
   const navigate = useNavigate()

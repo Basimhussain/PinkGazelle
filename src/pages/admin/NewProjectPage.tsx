@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { AdminSidebar } from '../../components/admin/AdminSidebar'
 import { createProject } from '../../lib/projects'
 import { useToast } from '../../components/shared/Toast'
 
 export function NewProjectPage() {
+  useDocumentTitle('New Project — Admin Portal')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [deadline, setDeadline] = useState('')
