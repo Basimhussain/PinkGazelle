@@ -125,7 +125,7 @@ export function AdminSidebar() {
           </div>
         </div>
         <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out" title="Sign out" style={{ fontSize: 16 }}>
-          ↩
+          ⇥
         </button>
       </div>
     </aside>

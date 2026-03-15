@@ -8,6 +8,7 @@ import { StatusBadge } from '../../components/shared/StatusBadge'
 import { formatDate } from '../../lib/utils'
 import { useRealtimeProjects } from '../../hooks/useRealtimeProjects'
 import type { ProjectWithProgress } from '../../types'
+import logoFooter from '../../assets/logo-admin-footer.png'
 
 // ── Deadline categorisation ───────────────────────────────────────────────────
 type DeadlineBucket = 'overdue' | 'due_soon' | 'on_track' | 'completed' | 'no_deadline'
@@ -265,6 +266,19 @@ export function AdminOverviewPage() {
             <Link to="/admin/projects/new" className="btn btn-primary">+ New Project</Link>
           </div>
           <ArchivedView projects={projects} loading={loading} />
+          <footer style={{ 
+            padding: '80px 0 60px', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            gap: 20,
+            marginTop: 'auto'
+          }}>
+            <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto', borderRadius: '8px' }} />
+            <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
+              © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
+            </div>
+          </footer>
         </div>
       </div>
     )
@@ -287,6 +301,19 @@ export function AdminOverviewPage() {
             loading={loading} 
             onDeleted={(ids: string[]) => setProjects((prev: ProjectWithProgress[]) => prev.filter(p => !ids.includes(p.id)))} 
           />
+          <footer style={{ 
+            padding: '80px 0 60px', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            gap: 20,
+            marginTop: 'auto'
+          }}>
+            <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto', borderRadius: '8px' }} />
+            <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
+              © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
+            </div>
+          </footer>
         </div>
       </div>
     )
@@ -551,6 +578,19 @@ export function AdminOverviewPage() {
             </>
           )}
         </div>
+        <footer style={{ 
+          padding: '80px 0 60px', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: 20,
+          marginTop: 'auto'
+        }}>
+          <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto', borderRadius: '8px' }} />
+          <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
+            © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
+          </div>
+        </footer>
       </div>
     </div>
   )

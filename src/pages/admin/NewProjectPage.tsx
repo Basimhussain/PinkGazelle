@@ -4,6 +4,7 @@ import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { AdminSidebar } from '../../components/admin/AdminSidebar'
 import { createProject } from '../../lib/projects'
 import { useToast } from '../../components/shared/Toast'
+import logoFooter from '../../assets/logo-admin-footer.png'
 
 export function NewProjectPage() {
   useDocumentTitle('New Project — Admin Portal')
@@ -76,6 +77,19 @@ export function NewProjectPage() {
             </form>
           </div>
         </div>
+        <footer style={{ 
+          padding: '80px 0 60px', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: 20,
+          marginTop: 'auto'
+        }}>
+          <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto', borderRadius: '8px' }} />
+          <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
+            © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
+          </div>
+        </footer>
       </div>
     </div>
   )
