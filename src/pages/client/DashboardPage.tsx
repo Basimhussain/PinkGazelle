@@ -163,16 +163,8 @@ export function ClientDashboardPage() {
                     <span className="progress-text" style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>Overall Progress</span>
                     <span className="progress-pct" style={{ fontSize: 12, fontWeight: 600 }}>{p.progress || 0}%</span>
                   </div>
-                  <div className="progress-bar-wrap" style={{ height: 8, background: 'var(--color-border-subtle)', borderRadius: 4, overflow: 'hidden' }}>
-                    <div 
-                      className="progress-bar-fill" 
-                      style={{ 
-                        width: `${p.progress || 0}%`, 
-                        height: '100%', 
-                        background: 'var(--color-primary)',
-                        transition: 'width 0.3s ease'
-                      }} 
-                    />
+                  <div className="progress-bar-wrap">
+                    <div className="progress-bar-fill" style={{ width: `${p.progress || 0}%` }} />
                   </div>
                 </div>
               ))}
@@ -263,16 +255,8 @@ export function ClientDashboardPage() {
               <span className="progress-text" style={{ fontWeight: 500 }}>Project Progress</span>
               <span className="progress-pct" style={{ fontWeight: 600, fontSize: 18 }}>{progress}%</span>
             </div>
-            <div className="progress-bar-wrap" style={{ height: 10, background: 'var(--color-border-subtle)', borderRadius: 5, overflow: 'hidden' }}>
-              <div 
-                className="progress-bar-fill" 
-                style={{ 
-                  width: `${progress}%`, 
-                  height: '100%', 
-                  background: 'var(--color-primary)',
-                  transition: 'width 0.5s ease-out'
-                }} 
-              />
+            <div className="progress-bar-wrap">
+              <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
             </div>
           </div>
         </div>
