@@ -107,7 +107,7 @@ export function ClientDashboardPage() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <Avatar name={displayName} size="sm" />
-            <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out">↩ Sign out</button>
+            <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out" style={{ fontSize: 16 }}>↩</button>
           </div>
         </div>
 
@@ -119,7 +119,12 @@ export function ClientDashboardPage() {
 
           {projects.length === 0 ? (
             <div className="card" style={{ padding: 48, textAlign: 'center' }}>
-              <div style={{ fontSize: 40, marginBottom: 16 }}>📭</div>
+              <div style={{ marginBottom: 16, color: 'var(--color-text-tertiary)' }}>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"/>
+                  <polyline points="15 9 18 12 15 15"/><line x1="2" x2="18" y1="12" y2="12"/>
+                </svg>
+              </div>
               <div style={{ fontWeight: 600, fontSize: 18, marginBottom: 8 }}>No projects assigned yet</div>
               <p style={{ color: 'var(--color-text-secondary)', fontSize: 14 }}>Your admin will invite you once a project is ready.</p>
             </div>
@@ -201,7 +206,10 @@ export function ClientDashboardPage() {
           onClick={() => setProject(null)}
           style={{ marginBottom: 16, paddingLeft: 0, color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: 6 }}
         >
-          <span style={{ fontSize: 18 }}>←</span> All Projects
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          All Projects
         </button>
 
         {/* Project Header */}
@@ -272,7 +280,12 @@ export function ClientDashboardPage() {
           <div>
             {tickets.length === 0 ? (
               <div className="empty-state">
-                <div className="empty-state-icon">🎫</div>
+                <div className="empty-state-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.69.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1"/>
+                    <path d="M2 13h20"/><path d="m7 13 4 4 4-4"/>
+                  </svg>
+                </div>
                 <div className="empty-state-title">No tickets yet</div>
                 <div className="empty-state-sub">Your admin will add tickets as work begins.</div>
               </div>
@@ -308,7 +321,11 @@ export function ClientDashboardPage() {
           <div>
             {milestones.length === 0 ? (
               <div className="empty-state">
-                <div className="empty-state-icon">🏁</div>
+                <div className="empty-state-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>
+                  </svg>
+                </div>
                 <div className="empty-state-title">No milestones yet</div>
               </div>
             ) : (
@@ -326,7 +343,12 @@ export function ClientDashboardPage() {
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <span style={{ fontWeight: 500, fontSize: 14 }}>
-                        {ms.status === 'completed' ? '✓ ' : ''}{ms.title}
+                        {ms.status === 'completed' ? (
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6, verticalAlign: 'middle' }}>
+                            <path d="M20 6 9 17l-5-5"/>
+                          </svg>
+                        ) : ''}
+                        {ms.title}
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                         {ms.due_date && (
@@ -347,7 +369,11 @@ export function ClientDashboardPage() {
           <div>
             {invoices.length === 0 ? (
               <div className="empty-state">
-                <div className="empty-state-icon">🧾</div>
+                <div className="empty-state-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                </div>
                 <div className="empty-state-title">No invoices yet</div>
               </div>
             ) : (

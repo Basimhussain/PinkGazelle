@@ -36,8 +36,8 @@
   --color-danger-subtle: #fef2f2;
 
   /* Ticket status colors */
-  --color-todo: #6b7280;
-  --color-todo-bg: #f3f4f6;
+  --color-todo: #db2777;
+  --color-todo-bg: #fdf2f8;
   --color-in-progress: #3b82f6;
   --color-in-progress-bg: #eff6ff;
   --color-done: #10b981;
@@ -156,6 +156,12 @@ input, textarea, select {
   flex-direction: column;
   padding: 20px 12px;
   flex-shrink: 0;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+  padding: 20px 8px;
 }
 
 .sidebar-logo {
@@ -238,6 +244,31 @@ input, textarea, select {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .sidebar-logo-name,
+.sidebar.collapsed .sidebar-logo-sub,
+.sidebar.collapsed .sidebar-heading,
+.sidebar.collapsed .sidebar-link-text,
+.sidebar.collapsed .sidebar-user-info,
+.sidebar.collapsed .sidebar-logo-mark {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-link {
+  justify-content: center;
+  padding: 10px;
+}
+
+.sidebar.collapsed .sidebar-logo {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.sidebar.collapsed .sidebar-footer {
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0;
 }
 
 .sidebar-footer {
@@ -381,6 +412,18 @@ input, textarea, select {
 .btn-danger:hover {
   background: var(--color-danger);
   color: white;
+}
+
+.btn-warning {
+  background: var(--color-warning-subtle);
+  color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.btn-warning:hover {
+  background: var(--color-warning);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-sm {
@@ -624,6 +667,7 @@ textarea {
   margin-bottom: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

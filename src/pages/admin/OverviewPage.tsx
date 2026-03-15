@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useLocation } from 'react-router-dom'
 import { AdminSidebar } from '../../components/admin/AdminSidebar'
-import { getAllProjects, getArchivedProjects } from '../../lib/projects'
+import { getAllProjects, getArchivedProjects, deleteProject } from '../../lib/projects'
 import { computePercentage } from '../../lib/progress'
 import { StatusBadge } from '../../components/shared/StatusBadge'
 import { formatDate } from '../../lib/utils'
@@ -48,7 +48,13 @@ function ArchivedView({ projects, loading }: { projects: ProjectWithProgress[]; 
         <div className="empty-state"><p>Loading…</p></div>
       ) : projects.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">📦</div>
+          <div className="empty-state-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+              <path d="m3.3 7 8.7 5 8.7-5"/>
+              <path d="M12 22V12"/>
+            </svg>
+          </div>
           <div className="empty-state-title">No archived projects</div>
         </div>
       ) : (
@@ -74,10 +80,136 @@ function ArchivedView({ projects, loading }: { projects: ProjectWithProgress[]; 
   )
 }
 
+// ── Projects List View ────────────────────────────────────────────────────────
+function ProjectsListView({ projects, loading, onDeleted }: { projects: ProjectWithProgress[]; loading: boolean; onDeleted: (ids: string[]) => void }) {
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const toggleAll = () => {
+    if (selectedIds.size === projects.length) {
+      setSelectedIds(new Set())
+    } else {
+      setSelectedIds(new Set(projects.map(p => p.id)))
+    }
+  }
+
+  const handleBulkDelete = async () => {
+    if (!selectedIds.size || isDeleting) return
+    if (!window.confirm(`Are you sure you want to delete ${selectedIds.size} project(s)? This cannot be undone.`)) return
+
+    setIsDeleting(true)
+    try {
+      await Promise.all(Array.from(selectedIds).map(id => deleteProject(id)))
+      onDeleted(Array.from(selectedIds))
+      setSelectedIds(new Set())
+    } catch (err) {
+      alert('Failed to delete some projects')
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+
+  const handleDeleteOne = async (e: React.MouseEvent, id: string, title: string) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!window.confirm(`Delete "${title}"?`)) return
+    try {
+      await deleteProject(id)
+      onDeleted([id])
+    } catch (err) {
+      alert('Failed to delete project')
+    }
+  }
+
+  if (loading) return <div className="page-content"><div className="empty-state"><p>Loading…</p></div></div>
+  if (projects.length === 0) return (
+    <div className="page-content">
+      <div className="empty-state">
+        <div className="empty-state-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+          </svg>
+        </div>
+        <div className="empty-state-title">No projects yet</div>
+        <div className="empty-state-sub">Create your first project to get started</div>
+        <Link to="/admin/projects/new" className="btn btn-primary">Create Project</Link>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="page-content">
+      <div className="section">
+        <div className="section-header" style={{ marginBottom: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13 }}>
+              <input type="checkbox" checked={selectedIds.size === projects.length} onChange={toggleAll} />
+              Select All ({projects.length})
+            </label>
+            {selectedIds.size > 0 && (
+              <button className="btn btn-danger btn-sm" onClick={handleBulkDelete} disabled={isDeleting}>
+                Delete Selected ({selectedIds.size})
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="projects-grid">
+          {projects.map(p => (
+            <div key={p.id} style={{ position: 'relative' }}>
+              <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 2 }}>
+                <input 
+                  type="checkbox" 
+                  checked={selectedIds.has(p.id)} 
+                  onChange={() => toggleSelect(p.id)} 
+                  style={{ width: 16, height: 16 }}
+                />
+              </div>
+              <Link to={`/admin/projects/${p.id}`} style={{ textDecoration: 'none' }}>
+                <div className={`project-card ${selectedIds.has(p.id) ? 'selected' : ''}`} style={{ paddingLeft: 40 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
+                    <div className="project-card-title">{p.title}</div>
+                    <StatusBadge status={p.status} />
+                  </div>
+                  {p.description && <div className="project-card-desc" style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>{p.description}</div>}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }}>
+                    <div className="project-card-meta">
+                      <span>{p.client ? p.client.email : 'No client'}</span>
+                    </div>
+                    <button 
+                      className="btn btn-ghost btn-sm text-danger" 
+                      onClick={(e) => handleDeleteOne(e, p.id, p.title)}
+                      style={{ padding: 4 }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Main dashboard ─────────────────────────────────────────────────────────────
 export function AdminOverviewPage() {
   const [searchParams] = useSearchParams()
+  const location = useLocation()
   const showArchived = searchParams.get('archived') === 'true'
+  const isAllProjectsPage = location.pathname === '/admin/projects' && !showArchived
 
   const [projects, setProjects] = useState<ProjectWithProgress[]>([])
   const [loading, setLoading] = useState(true)
@@ -99,22 +231,22 @@ export function AdminOverviewPage() {
       const isArchived = project.status === 'archived'
       if (isArchived !== showArchived) return
       const progress = await computePercentage(project.id)
-      setProjects(prev => [{ ...project, progress }, ...prev])
+      setProjects((prev: ProjectWithProgress[]) => [{ ...project, progress }, ...prev])
     },
     onUpdate: async (project) => {
       const isArchived = project.status === 'archived'
       if (isArchived !== showArchived) {
         // project moved in/out of this view — remove it
-        setProjects(prev => prev.filter(p => p.id !== project.id))
+        setProjects((prev: ProjectWithProgress[]) => prev.filter(p => p.id !== project.id))
         return
       }
       const progress = await computePercentage(project.id)
-      setProjects(prev =>
+      setProjects((prev: ProjectWithProgress[]) =>
         prev.map(p => p.id === project.id ? { ...project, progress, client: p.client } : p)
       )
     },
     onDelete: (id) => {
-      setProjects(prev => prev.filter(p => p.id !== id))
+      setProjects((prev: ProjectWithProgress[]) => prev.filter(p => p.id !== id))
     },
   })
 
@@ -128,8 +260,31 @@ export function AdminOverviewPage() {
               <div className="topbar-title">Archived Projects</div>
               <div className="topbar-subtitle">Projects moved to archive</div>
             </div>
+            <Link to="/admin/projects/new" className="btn btn-primary">+ New Project</Link>
           </div>
           <ArchivedView projects={projects} loading={loading} />
+        </div>
+      </div>
+    )
+  }
+
+  if (isAllProjectsPage) {
+    return (
+      <div className="app-shell">
+        <AdminSidebar />
+        <div className="app-main">
+          <div className="topbar">
+            <div>
+              <div className="topbar-title">All Projects</div>
+              <div className="topbar-subtitle">Manage and organize your project list</div>
+            </div>
+            <Link to="/admin/projects/new" className="btn btn-primary">+ New Project</Link>
+          </div>
+          <ProjectsListView 
+            projects={projects} 
+            loading={loading} 
+            onDeleted={(ids: string[]) => setProjects((prev: ProjectWithProgress[]) => prev.filter(p => !ids.includes(p.id)))} 
+          />
         </div>
       </div>
     )
@@ -381,7 +536,11 @@ export function AdminOverviewPage() {
               {/* Empty state */}
               {projects.length === 0 && (
                 <div className="empty-state">
-                  <div className="empty-state-icon">📁</div>
+                  <div className="empty-state-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+                    </svg>
+                  </div>
                   <div className="empty-state-title">No projects yet</div>
                   <div className="empty-state-sub">Create your first project to see analytics here</div>
                   <Link to="/admin/projects/new" className="btn btn-primary">Create Project</Link>

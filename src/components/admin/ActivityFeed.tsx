@@ -14,7 +14,20 @@ export function ActivityFeed({ activities, isLoading, selectionMode, selectedIds
   if (isLoading) return <div className="empty-feed">Loading…</div>
   if (activities.length === 0) return (
     <div className="empty-feed">
-      <div style={{ fontSize: 24, marginBottom: 8 }}>🌀</div>
+      <div style={{ color: 'var(--color-text-tertiary)', marginBottom: 12 }}>
+        <svg 
+          width="32" 
+          height="32" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="1.5" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        >
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      </div>
       No activity yet
     </div>
   )

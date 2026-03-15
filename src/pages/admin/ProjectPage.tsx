@@ -519,11 +519,17 @@ export function ProjectPage() {
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             <button className="btn btn-secondary btn-sm" onClick={() => setInviting(true)}>
-              ✉ Invite Client
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              Invite Client
             </button>
             {project.status !== 'completed' && project.status !== 'archived' && (
               <button className="btn btn-secondary btn-sm" onClick={handleMarkComplete}>
-                ✓ Mark Complete
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                Mark Complete
               </button>
             )}
             {project.status === 'completed' && (
@@ -545,7 +551,10 @@ export function ProjectPage() {
               Delete
             </button>
             <button className="btn btn-primary btn-sm" onClick={() => setAddingTicket(true)}>
-              + Ticket
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14m-7-7v14"/>
+              </svg>
+              Ticket
             </button>
           </div>
         </div>
@@ -574,10 +583,24 @@ export function ProjectPage() {
                   </>
                 ) : (
                   <button
-                    className="btn btn-ghost btn-sm"
-                    style={{ padding: '2px 6px', fontSize: 13 }}
+                    className="btn btn-warning btn-sm"
+                    style={{ padding: '4px 10px', fontSize: 13 }}
                     onClick={() => { setDeadlineInput(project.deadline ?? ''); setEditingDeadline(true) }}
                   >
+                    <svg 
+                      width="14" 
+                      height="14" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2.5" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <path d="m12 9 0 4"/>
+                      <path d="M12 17h.01"/>
+                      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                    </svg>
                     {project.deadline ? formatDate(project.deadline) : 'Set deadline'}
                   </button>
                 )}
@@ -666,7 +689,12 @@ export function ProjectPage() {
                 >
                   {milestoneSelectMode ? 'Done' : 'Select'}
                 </button>
-                <button className="btn btn-secondary btn-sm" onClick={() => setAddingMilestone(true)}>+ Milestone</button>
+                <button className="btn btn-secondary btn-sm" onClick={() => setAddingMilestone(true)}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14m-7-7v14"/>
+                  </svg>
+                  Milestone
+                </button>
               </div>
             </div>
             {milestones.length === 0 ? (
@@ -702,7 +730,11 @@ export function ProjectPage() {
                             onClick={() => handleMilestoneToggle(ms)}
                             aria-label={`Toggle ${ms.title}`}
                           >
-                            {ms.status === 'completed' ? '✓' : ''}
+                            {ms.status === 'completed' ? (
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 6 9 17l-5-5"/>
+                              </svg>
+                            ) : ''}
                           </button>
                         )}
                         {isEditingThis ? (
