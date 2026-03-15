@@ -5,6 +5,8 @@ import { useAuthStore } from '../store/useAuthStore'
 
 type LoginMode = 'password' | 'magic-link'
 
+import logo from '../assets/logo-login.png'
+
 export function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -45,7 +47,9 @@ export function LoginPage() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <div className="login-logo">PG</div>
+        <div className="login-logo">
+          <img src={logo} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
         <h1 className="login-title">Welcome back</h1>
         <p className="login-sub">Sign in to your Pink Gazelle portal</p>
 
