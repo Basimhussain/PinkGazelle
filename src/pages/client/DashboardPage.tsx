@@ -16,7 +16,7 @@ import { signOut } from '../../lib/auth'
 import { formatDate, formatSAR } from '../../lib/utils'
 import logo from '../../assets/logo-login.png'
 import logoAvatar from '../../assets/logo-avatar.png'
-import logoWhite from '../../assets/logo-footer.png'
+import logoFooter from '../../assets/logo-footer.png'
 import type { Ticket, Milestone, Invoice, ProjectWithProgress, ActivityLog } from '../../types'
 
 type ActiveTab = 'tickets' | 'milestones' | 'invoices' | 'activity'
@@ -187,7 +187,7 @@ export function ClientDashboardPage() {
           gap: 20,
           marginTop: 'auto'
         }}>
-          <img src={logoWhite} alt="Pink Gazelle" style={{ width: 80, height: 'auto' }} />
+          <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto' }} />
           <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
             © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
           </div>
@@ -449,7 +449,7 @@ export function ClientDashboardPage() {
         gap: 20,
         marginTop: 'auto'
       }}>
-        <img src={logoWhite} alt="Pink Gazelle" style={{ width: 80, height: 'auto' }} />
+        <img src={logoFooter} alt="Pink Gazelle" style={{ width: 80, height: 'auto' }} />
         <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
           © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
         </div>
