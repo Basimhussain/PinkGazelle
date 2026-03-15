@@ -114,8 +114,8 @@ export function ClientDashboardPage() {
             <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 26, height: 26, flexShrink: 0, background: 'var(--color-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
-              👤
+            <div style={{ width: 26, height: 26, flexShrink: 0, background: 'var(--color-accent)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600 }}>
+              {displayName.charAt(0).toUpperCase()}
             </div>
             <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out" style={{ fontSize: 16 }}>↩</button>
           </div>
@@ -216,8 +216,8 @@ export function ClientDashboardPage() {
           <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 26, height: 26, flexShrink: 0, background: 'var(--color-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>
-              👤
+            <div style={{ width: 26, height: 26, flexShrink: 0, background: 'var(--color-accent)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600 }}>
+              {displayName.charAt(0).toUpperCase()}
             </div>
           <span style={{ fontSize: 13, fontWeight: 500 }}>{displayName}</span>
           <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out">↩</button>
