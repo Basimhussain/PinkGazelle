@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
-import { Avatar } from '../../components/shared/Avatar'
 import { StatusBadge } from '../../components/shared/StatusBadge'
 import { SlideOver } from '../../components/shared/SlideOver'
 import { CommentThread } from '../../components/shared/CommentThread'
@@ -16,6 +15,7 @@ import { computePercentage } from '../../lib/progress'
 import { signOut } from '../../lib/auth'
 import { formatDate, formatSAR } from '../../lib/utils'
 import logo from '../../assets/logo-login.png'
+import logoAvatar from '../../assets/logo-avatar.png'
 import logoWhite from '../../assets/logo-footer.png'
 import type { Ticket, Milestone, Invoice, ProjectWithProgress, ActivityLog } from '../../types'
 
@@ -113,7 +113,9 @@ export function ClientDashboardPage() {
             <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Avatar name={displayName} size="sm" />
+            <div style={{ width: 26, height: 26, flexShrink: 0 }}>
+              <img src={logoAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            </div>
             <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out" style={{ fontSize: 16 }}>↩</button>
           </div>
         </div>
@@ -213,7 +215,9 @@ export function ClientDashboardPage() {
           <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle – Client Portal</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Avatar name={displayName} size="sm" />
+          <div style={{ width: 26, height: 26, flexShrink: 0 }}>
+            <img src={logoAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
           <span style={{ fontSize: 13, fontWeight: 500 }}>{displayName}</span>
           <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out">↩</button>
         </div>

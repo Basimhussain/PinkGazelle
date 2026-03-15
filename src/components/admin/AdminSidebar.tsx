@@ -7,6 +7,7 @@ import { getAllProjects } from '../../lib/projects'
 import type { ProjectWithProgress } from '../../types'
 
 import logoLogin from '../../assets/logo-login.png'
+import logoAvatar from '../../assets/logo-avatar.png'
 
 export function AdminSidebar() {
   const { profile } = useAuthStore()
@@ -115,7 +116,7 @@ export function AdminSidebar() {
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 26, height: 26 }}>
-            <img src={logoLogin} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
+            <img src={logoAvatar} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div className="sidebar-user-info">
             <div className="sidebar-user-name">{displayName}</div>
