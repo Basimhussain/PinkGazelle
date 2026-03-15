@@ -9,7 +9,11 @@ export function InviteAcceptPage() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    if (!token) { navigate('/login', { replace: true }); return }
+    if (!token) { 
+      console.log('No token found in InviteAcceptPage, redirecting to login');
+      navigate('/login', { replace: true }); 
+      return 
+    }
 
     const assignedRef = { current: false }
 
@@ -17,29 +21,34 @@ export function InviteAcceptPage() {
       if (assignedRef.current) return
       assignedRef.current = true
       
+      console.log(`Attempting to assign project with token: ${token} for user: ${userId}`);
+      
       const { error: rpcError } = await supabase.rpc('accept_project_invite', {
         p_token: token!,
         p_user_id: userId,
       })
+      
       if (rpcError) {
+        console.error('RPC Error in InviteAcceptPage:', rpcError);
         setError(rpcError.message)
       } else {
-        navigate('/client', { replace: true })
+        console.log('Invitation accepted successfully, navigating to client portal');
+        // Small delay to ensure DB propagation if needed, although RPC is transactional
+        setTimeout(() => navigate('/client', { replace: true }), 100);
       }
     }
 
     // Check for existing session first
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
+        console.log('Existing session found in InviteAcceptPage:', session.user.id);
         assignProject(session.user.id)
       }
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('Auth event in InviteAcceptPage:', event)
-      if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION') && session?.user) {
-        // We don't unsubscribe immediately anymore to ensure we catch the event if it fires multiple times
-        // but we protect inside assignProject if needed. Actually, RPC is idempotent-ish here.
+      if (session?.user) {
         assignProject(session.user.id)
       }
     })

@@ -34,7 +34,7 @@ serve(async (req) => {
 
   try {
     const { email } = await req.json()
-    console.log(`Sending magic link to ${email} via Gmail SMTP`)
+    console.log(`Verifying email eligibility for ${email}`)
 
     if (!email) {
       return new Response(JSON.stringify({ error: 'Missing email' }), {
@@ -42,6 +42,30 @@ serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
+
+    // Check if email is invited or already a user
+    const { data: profile } = await adminClient
+      .from('profiles')
+      .select('id')
+      .eq('email', email)
+      .maybeSingle()
+
+    const { data: invite } = await adminClient
+      .from('project_invites')
+      .select('id')
+      .eq('email', email)
+      .in('status', ['pending', 'accepted'])
+      .maybeSingle()
+
+    if (!profile && !invite) {
+      console.log(`Unauthorized login attempt for: ${email}`)
+      return new Response(JSON.stringify({ error: 'This email is not registered or invited to any projects.' }), {
+        status: 403, // Forbidden
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
+    console.log(`Sending magic link to eligible user: ${email} via Gmail SMTP`)
 
     // Generate magic link
     const { data, error } = await adminClient.auth.admin.generateLink({
