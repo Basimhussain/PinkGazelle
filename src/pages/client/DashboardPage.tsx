@@ -15,7 +15,7 @@ import { computePercentage } from '../../lib/progress'
 import { signOut } from '../../lib/auth'
 import { formatDate, formatSAR } from '../../lib/utils'
 import logo from '../../assets/logo-login.png'
-import logoWhite from '../../assets/logo.png'
+import logoWhite from '../../assets/logo-footer.png'
 import type { Ticket, Milestone, Invoice, ProjectWithProgress, ActivityLog } from '../../types'
 
 type ActiveTab = 'tickets' | 'milestones' | 'invoices' | 'activity'
@@ -100,10 +100,9 @@ export function ClientDashboardPage() {
     </div>
   )
 
-  // 1. Multiple Projects List View
   if (!project) {
     return (
-      <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)' }}>
+      <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)', display: 'flex', flexDirection: 'column' }}>
         <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div className="sidebar-logo-mark" style={{ background: 'transparent' }}>
@@ -182,7 +181,7 @@ export function ClientDashboardPage() {
           flexDirection: 'column', 
           alignItems: 'center', 
           gap: 16,
-          opacity: 0.6
+          marginTop: 'auto'
         }}>
           <img src={logoWhite} alt="Pink Gazelle" style={{ width: 60, height: 'auto' }} />
           <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
@@ -202,7 +201,7 @@ export function ClientDashboardPage() {
   ]
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)', display: 'flex', flexDirection: 'column' }}>
       {/* Top bar */}
       <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -445,7 +444,7 @@ export function ClientDashboardPage() {
         flexDirection: 'column', 
         alignItems: 'center', 
         gap: 16,
-        opacity: 0.6
+        marginTop: 'auto'
       }}>
         <img src={logoWhite} alt="Pink Gazelle" style={{ width: 60, height: 'auto' }} />
         <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
