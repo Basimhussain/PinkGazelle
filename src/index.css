@@ -180,10 +180,7 @@ input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: -0.5px;
+  overflow: hidden;
 }
 
 .sidebar-logo-name {
@@ -1160,6 +1157,8 @@ textarea {
   margin-bottom: 24px;
   overflow: hidden;
   border-radius: var(--radius-lg);
+  background: var(--color-text-primary);
+  padding: 8px;
 }
 
 .login-title {

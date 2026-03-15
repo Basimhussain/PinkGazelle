@@ -6,7 +6,6 @@ import { useUIStore } from '../../store/useUIStore'
 import { getAllProjects } from '../../lib/projects'
 import type { ProjectWithProgress } from '../../types'
 
-import logo from '../../assets/logo.png'
 import logoLogin from '../../assets/logo-login.png'
 
 export function AdminSidebar() {
@@ -32,12 +31,11 @@ export function AdminSidebar() {
   return (
     <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        <div className="sidebar-logo-mark" style={{ background: 'transparent' }}>
-          <img src={logo} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <div className="sidebar-logo-mark" style={{ background: 'var(--color-text-primary)' }}>
+          <img src={logoLogin} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
         </div>
         <div className="sidebar-logo-details">
-          <div className="sidebar-logo-name">Pink Gazelle</div>
-          <div className="sidebar-logo-sub">Admin Portal</div>
+          <div className="sidebar-logo-name" style={{ fontSize: 16 }}>Pink Gazelle – Admin Portal</div>
         </div>
       </div>
 

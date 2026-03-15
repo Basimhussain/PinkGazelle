@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 
-import logo from '../assets/logo.png'
+import logo from '../assets/logo-login.png'
 
 export function InviteAcceptPage() {
   const [searchParams] = useSearchParams()
@@ -68,7 +68,7 @@ export function InviteAcceptPage() {
     <div className="login-page">
       <div className="login-card">
         <div className="login-logo" style={{ background: 'transparent' }}>
-          <img src={logo} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img src={logo} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
         </div>
         {error ? (
           <>
