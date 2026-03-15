@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { Avatar } from '../../components/shared/Avatar'
 import { StatusBadge } from '../../components/shared/StatusBadge'
 import { SlideOver } from '../../components/shared/SlideOver'
@@ -21,6 +22,7 @@ import type { Ticket, Milestone, Invoice, ProjectWithProgress, ActivityLog } fro
 type ActiveTab = 'tickets' | 'milestones' | 'invoices' | 'activity'
 
 export function ClientDashboardPage() {
+  useDocumentTitle('Pink Gazelle – Client Portal')
   const { profile } = useAuthStore()
   const navigate = useNavigate()
   const [projects, setProjects] = useState<ProjectWithProgress[]>([])

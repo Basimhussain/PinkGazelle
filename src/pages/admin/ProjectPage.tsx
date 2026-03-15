@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { AdminSidebar } from '../../components/admin/AdminSidebar'
 import { KanbanColumn } from '../../components/admin/KanbanColumn'
 import { ActivityFeed } from '../../components/admin/ActivityFeed'
@@ -24,6 +25,10 @@ export function ProjectPage() {
   const { showToast } = useToast()
 
   const [project, setProject] = useState<ProjectWithProgress | null>(null)
+  
+  // Set title to include project name if available, otherwise just Admin Portal
+  useDocumentTitle(project ? `${project.title} — Admin Portal` : 'Project — Admin Portal')
+
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [milestones, setMilestones] = useState<Milestone[]>([])
   const [invoices, setInvoices] = useState<Invoice[]>([])

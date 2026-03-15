@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams, useLocation } from 'react-router-dom'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { AdminSidebar } from '../../components/admin/AdminSidebar'
 import { getAllProjects, getArchivedProjects, deleteProject } from '../../lib/projects'
 import { computePercentage } from '../../lib/progress'
@@ -206,6 +207,7 @@ function ProjectsListView({ projects, loading, onDeleted }: { projects: ProjectW
 
 // ── Main dashboard ─────────────────────────────────────────────────────────────
 export function AdminOverviewPage() {
+  useDocumentTitle('Pink Gazelle – Admin Portal')
   const [searchParams] = useSearchParams()
   const location = useLocation()
   const showArchived = searchParams.get('archived') === 'true'

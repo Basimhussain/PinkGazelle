@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { signIn, sendMagicLink } from '../lib/auth'
 import { useAuthStore } from '../store/useAuthStore'
 
@@ -8,11 +9,12 @@ type LoginMode = 'password' | 'magic-link'
 import logo from '../assets/logo-login.png'
 
 export function LoginPage() {
+  const [mode, setMode] = useState<LoginMode>('password')
+  useDocumentTitle(mode === 'password' ? 'Admin Login — Pink Gazelle' : 'Client Login — Pink Gazelle')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [mode, setMode] = useState<LoginMode>('password')
   const [magicLinkSent, setMagicLinkSent] = useState(false)
   
   const navigate = useNavigate()
