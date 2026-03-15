@@ -6,8 +6,9 @@ import { useUIStore } from '../../store/useUIStore'
 import { getAllProjects } from '../../lib/projects'
 import type { ProjectWithProgress } from '../../types'
 
-import logoLogin from '../../assets/logo-login.png'
+import logoAdmin from '../../assets/logo-admin.png'
 import logoAvatar from '../../assets/logo-avatar.png'
+
 
 export function AdminSidebar() {
   const { profile } = useAuthStore()
@@ -32,8 +33,8 @@ export function AdminSidebar() {
   return (
     <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        <div className="sidebar-logo-mark" style={{ background: 'transparent' }}>
-          <img src={logoLogin} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 42, height: 42 }}>
+          <img src={logoAdmin} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '10px' }} />
         </div>
         <div className="sidebar-logo-details">
           <div className="sidebar-logo-name" style={{ fontSize: 16 }}>Pink Gazelle – Admin Portal</div>
@@ -116,7 +117,7 @@ export function AdminSidebar() {
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 26, height: 26 }}>
-            <img src={logoAvatar} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={logoAvatar} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
           </div>
           <div className="sidebar-user-info">
             <div className="sidebar-user-name">{displayName}</div>

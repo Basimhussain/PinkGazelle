@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { supabase } from '../lib/supabase'
 
-import logo from '../assets/logo-login.png'
+// No logo imports - redo process started
 
 export function InviteAcceptPage() {
   useDocumentTitle('Join Project — Pink Gazelle')
@@ -69,8 +69,8 @@ export function InviteAcceptPage() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <div className="login-logo" style={{ background: 'transparent' }}>
-          <img src={logo} alt="Pink Gazelle" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
+        <div className="login-logo" style={{ background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: 24, borderRadius: 'var(--radius-sm)' }}>
+          PG
         </div>
         {error ? (
           <>
