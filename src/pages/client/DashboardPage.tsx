@@ -105,10 +105,10 @@ export function ClientDashboardPage() {
       <div style={{ minHeight: '100vh', background: 'var(--color-bg-subtle)', display: 'flex', flexDirection: 'column' }}>
         <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="sidebar-logo-mark" style={{ background: 'transparent' }}>
+            <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 36, height: 36 }}>
               <img src={logo} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
             </div>
-            <div style={{ fontWeight: 600, fontSize: 15 }}>Pink Gazelle</div>
+            <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <Avatar name={displayName} size="sm" />
@@ -116,7 +116,7 @@ export function ClientDashboardPage() {
           </div>
         </div>
 
-        <div className="page-content" style={{ maxWidth: 800, margin: '0 auto', paddingTop: 40 }}>
+        <div className="page-content" style={{ maxWidth: 1000, margin: '0 auto', width: '100%', paddingTop: 40 }}>
           <div style={{ marginBottom: 32 }}>
             <h1 className="page-title" style={{ marginBottom: 8 }}>Welcome, {profile?.first_name || 'Client'}</h1>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 15 }}>Select a project to view its status and updates.</p>
@@ -176,14 +176,14 @@ export function ClientDashboardPage() {
         </div>
 
         <footer style={{ 
-          padding: '80px 0 60px', 
+          padding: '100px 0 80px', 
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center', 
-          gap: 16,
+          gap: 20,
           marginTop: 'auto'
         }}>
-          <img src={logoWhite} alt="Pink Gazelle" style={{ width: 60, height: 'auto' }} />
+          <img src={logoWhite} alt="Pink Gazelle" style={{ width: 80, height: 'auto' }} />
           <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
             © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
           </div>
@@ -205,11 +205,11 @@ export function ClientDashboardPage() {
       {/* Top bar */}
       <div className="topbar" style={{ paddingLeft: 24, paddingRight: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div className="sidebar-logo-mark" style={{ background: 'transparent' }}>
+          <div className="sidebar-logo-mark" style={{ background: 'transparent', width: 36, height: 36 }}>
             <img src={logo} alt="PG" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
           </div>
           <div>
-            <div style={{ fontWeight: 600, fontSize: 15 }}>Pink Gazelle</div>
+            <div style={{ fontWeight: 600, fontSize: 18 }}>Pink Gazelle</div>
             <div style={{ fontSize: 11, color: 'var(--color-text-tertiary)' }}>Client Portal</div>
           </div>
         </div>
@@ -220,14 +220,14 @@ export function ClientDashboardPage() {
         </div>
       </div>
 
-      <div className="page-content">
+      <div className="page-content" style={{ maxWidth: 1000, margin: '0 auto', width: '100%', paddingTop: 40 }}>
         {/* Back navigation */}
         <button 
           className="btn btn-ghost btn-sm" 
           onClick={() => setProject(null)}
           style={{ marginBottom: 16, paddingLeft: 0, color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: 6 }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="m15 18-6-6 6-6"/>
           </svg>
           All Projects
@@ -236,7 +236,7 @@ export function ClientDashboardPage() {
         {/* Project Header */}
         <div style={{ marginBottom: 28 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-            <h1 className="page-title" style={{ margin: 0 }}>{project.title}</h1>
+            <h1 className="page-title" style={{ margin: 0, fontSize: 32 }}>{project.title}</h1>
             <StatusBadge status={project.status} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
@@ -257,7 +257,7 @@ export function ClientDashboardPage() {
           <div className="card" style={{ marginBottom: 0 }}>
             <div className="progress-label" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
               <span className="progress-text" style={{ fontWeight: 500 }}>Project Progress</span>
-              <span className="progress-pct" style={{ fontWeight: 600 }}>{progress}%</span>
+              <span className="progress-pct" style={{ fontWeight: 600, fontSize: 18 }}>{progress}%</span>
             </div>
             <div className="progress-bar-wrap" style={{ height: 10, background: 'var(--color-border-subtle)', borderRadius: 5, overflow: 'hidden' }}>
               <div 
@@ -439,14 +439,14 @@ export function ClientDashboardPage() {
       </div>
 
       <footer style={{ 
-        padding: '100px 0 80px', 
+        padding: '120px 0 100px', 
         display: 'flex', 
         flexDirection: 'column', 
         alignItems: 'center', 
-        gap: 16,
+        gap: 20,
         marginTop: 'auto'
       }}>
-        <img src={logoWhite} alt="Pink Gazelle" style={{ width: 60, height: 'auto' }} />
+        <img src={logoWhite} alt="Pink Gazelle" style={{ width: 80, height: 'auto' }} />
         <div style={{ fontSize: 13, color: 'var(--color-text-tertiary)', fontWeight: 500, letterSpacing: '0.02em' }}>
           © {new Date().getFullYear()} Pink Gazelle®. All rights reserved.
         </div>
