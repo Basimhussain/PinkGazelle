@@ -1,5 +1,4 @@
 {
-  "trigger": "rollback-build-1",
   "rewrites": [
     {
       "source": "/(.*)",
