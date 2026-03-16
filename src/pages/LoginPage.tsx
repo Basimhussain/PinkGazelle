@@ -6,7 +6,8 @@ import { useAuthStore } from '../store/useAuthStore'
 
 type LoginMode = 'password' | 'magic-link'
 
-// No logo imports - redo process started
+import logoLogin from '../assets/logo-login.png'
+
 
 
 export function LoginPage() {
@@ -50,8 +51,8 @@ export function LoginPage() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <div className="login-logo" style={{ background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: 32, borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-          PG
+        <div className="login-logo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img src={logoLogin} alt="Pink Gazelle" style={{ width: 64, height: 64, objectFit: 'contain', borderRadius: '10px' }} />
         </div>
         <h1 className="login-title">Welcome back</h1>
         <p className="login-sub">Sign in to your Pink Gazelle portal</p>
@@ -78,7 +79,8 @@ export function LoginPage() {
               color: mode === 'password' ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
               boxShadow: mode === 'password' ? 'var(--shadow-sm)' : 'none',
               transition: 'all 0.2s ease',
-              zIndex: 1
+              zIndex: 1,
+              whiteSpace: 'nowrap'
             }}
           >
             Admin Portal
@@ -96,7 +98,8 @@ export function LoginPage() {
               color: mode === 'magic-link' ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
               boxShadow: mode === 'magic-link' ? 'var(--shadow-sm)' : 'none',
               transition: 'all 0.2s ease',
-              zIndex: 1
+              zIndex: 1,
+              whiteSpace: 'nowrap'
             }}
           >
             Client Portal
@@ -118,21 +121,14 @@ export function LoginPage() {
         )}
         
         {magicLinkSent ? (
-          <div style={{ 
-            textAlign: 'center', 
-            padding: '32px 24px', 
-            background: 'var(--color-success-subtle)', 
-            borderRadius: '16px',
-            border: '1px solid rgba(16, 185, 129, 0.1)'
-          }}>
-            <div style={{ fontSize: '40px', marginBottom: '16px' }}>📧</div>
-            <h3 style={{ margin: '0 0 12px 0', fontSize: '18px', color: 'var(--color-success)', fontWeight: '600' }}>Check your email</h3>
-            <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', lineHeight: '1.5', margin: '0 0 24px 0' }}>
-              We've sent a secure login link to <br/><strong>{email}</strong>
+          <div style={{ textAlign: 'center', padding: '16px 0' }}>
+            <h3 style={{ margin: '0 0 12px 0', fontSize: '20px', fontWeight: '600', color: 'var(--color-success)' }}>Check your email</h3>
+            <p style={{ fontSize: '15px', color: 'var(--color-text-secondary)', lineHeight: '1.6', margin: '0 0 32px 0' }}>
+              We've sent a secure login link to <br/><strong style={{ color: 'var(--color-text-primary)', fontWeight: '500' }}>{email}</strong>
             </p>
             <button 
               className="btn btn-secondary" 
-              style={{ width: '100%', justifyContent: 'center' }}
+              style={{ width: '100%', justifyContent: 'center', padding: '12px', borderRadius: '10px' }}
               onClick={() => setMagicLinkSent(false)}
             >
               Back to Sign In
@@ -162,7 +158,7 @@ export function LoginPage() {
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="Enter your password"
                   required
                   autoComplete="current-password"
                   style={{ padding: '12px 16px', borderRadius: '10px' }}
