@@ -212,7 +212,7 @@ export function ClientDashboardPage() {
               {displayName.charAt(0).toUpperCase()}
             </div>
           <span style={{ fontSize: 13, fontWeight: 500 }}>{displayName}</span>
-          <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out">↩</button>
+          <button className="btn btn-ghost btn-sm" onClick={handleSignOut} aria-label="Sign out">↩︎</button>
         </div>
       </div>
 
