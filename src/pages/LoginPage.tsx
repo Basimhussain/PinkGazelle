@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { signIn, sendMagicLink } from '../lib/auth'
@@ -19,6 +19,20 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [magicLinkSent, setMagicLinkSent] = useState(false)
   
+  const [idle, setIdle] = useState(false)
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const resetIdle = useCallback(() => {
+    setIdle(false)
+    if (idleTimer.current) clearTimeout(idleTimer.current)
+    idleTimer.current = setTimeout(() => setIdle(true), 3000)
+  }, [])
+
+  useEffect(() => {
+    resetIdle()
+    return () => { if (idleTimer.current) clearTimeout(idleTimer.current) }
+  }, [resetIdle])
+
   const navigate = useNavigate()
   const { profile, isLoading } = useAuthStore()
 
@@ -49,8 +63,21 @@ export function LoginPage() {
   }
 
   return (
-    <div className="login-page">
-      <div className="login-card">
+    <div className="login-page" onMouseMove={resetIdle} onKeyDown={resetIdle}>
+      <video
+        className="login-bg-video"
+        src="/pink-gazelle.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      <div className="login-bg-overlay" />
+      <div
+        className="login-card"
+        onClick={resetIdle}
+        style={{ opacity: idle ? 0.05 : 1, transition: 'opacity 0.8s ease' }}
+      >
         <div className="login-logo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img src={logoLogin} alt="Pink Gazelle" style={{ width: 64, height: 64, objectFit: 'contain', borderRadius: '10px' }} />
         </div>
